@@ -22,18 +22,47 @@ let board = [
 // using let because the variable is expected to change from 'X' to 'O' and back
 let currentMarker = 'X'
 
-const handleClick = (element) => {
+// const handleClick = (element) => {
 
-  // this uses the "log" method on the "console" to log out the element's id so we can see it with our human eyes
-  console.log(`The element you clicked on has an id:  ${element.id}`)
+//   // this uses the "log" method on the "console" to log out the element's id so we can see it with our human eyes
+//   console.log(`The element you clicked on has an id:  ${element.id}`)
 
-  // this next line prevents an X being changed to an O or an O being changed to an X by...
-  //  checking to see if the square clicked has anything in it, if not continue
-  if(!document.getElementById(element.id).innerHTML){
-    addMarker(element.id)
-  }
-}
+//   // this next line prevents an X being changed to an O or an O being changed to an X by...
+//   //  checking to see if the square clicked has anything in it, if not continue
+//   if(!document.getElementById(element.id).innerHTML){
+//     addMarker(element.id)
+//     updateBoard(element.id)
+//     checkForWin()
+
+//   }
+// }
 const addMarker = (row, column) => {
+
+    // @TODO-1: Open the console tab in your Chrome Inspector Tool and click on the top-left square to see what's logged to the console. 
+    // console.log(`*** The current marker is:  ${currentMarker}. ***`)
+    // console.log(`Therefore, a  "${currentMarker}"  should be placed in the square with the id:  ${id}`)
+  
+   
+    // let element = document.getElementById(row, column)
+  
+  
+    //take apart the id
+    //change the first character of the id to an integer
+    //and save that as the row
+    // const row = parseInt(element.row, column.charAt(0))
+    // //change the third character of the id, after the dash, to an integer
+    // //and save that as column
+    // const column = parseInt(element.id.charAt(2))
+  
+    board[row][column] = currentMarker
+  
+     //add the marker to the GUI 
+     //set the innerHTML property of the element that was clicked to the "currentMarker"
+      // element.innerHTML = currentMarker
+  
+    // //run checkForWin function
+      checkForWin()
+  }
 
   // @TODO-1: Open the console tab in your Chrome Inspector Tool and click on the top-left square to see what's logged to the console. 
   //console.log(`*** The current marker is:  ${currentMarker}. ***`)
@@ -51,17 +80,18 @@ const addMarker = (row, column) => {
   //and save that as column
   //const column = parseInt(element.id.charAt(2))
 
-  board[row][column] = currentMarker
+//   board[row][column] = currentMarker;
 
-   //add the marker to the GUI 
-   //set the innerHTML property of the element that was clicked to the "currentMarker"
-   // element.innerHTML = currentMarker
+//    //add the marker to the GUI 
+//    //set the innerHTML property of the element that was clicked to the "currentMarker"
+//    // element.innerHTML = currentMarker
 
-  // //run checkForWin functio
+//   // //run checkForWin functio
 
 
 
-}
+// }
+
 
 const resetBoard = () => {
 
@@ -126,17 +156,18 @@ const verticalWin = () => {
 
 
 const ticTacToe = (row, column) => {
-  if (!board[row][column]){
+  if (board[row][column].length > 0){
+    console.log("here")
     addMarker(row, column)
   }
-  if (checkForWin()){
-    return true
-  }
+  // if (checkForWin()){
+  //   return true
+  // }
 }
 
 const getPrompt = () => {
   printBoard();
-  console.log("It's Player " + playerTurn + "'s turn.");
+  console.log("It's Player " + currentMarker + "'s turn.");
   rl.question('row: ', (row) => {
     rl.question('column: ', (column) => {
       ticTacToe(row, column);
